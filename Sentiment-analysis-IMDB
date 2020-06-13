@@ -1,0 +1,177 @@
+{
+  "nbformat": 4,
+  "nbformat_minor": 0,
+  "metadata": {
+    "colab": {
+      "name": "Untitled1.ipynb",
+      "provenance": [],
+      "collapsed_sections": [],
+      "authorship_tag": "ABX9TyMdxKJujs2I5lDbe8+cTQ3s",
+      "include_colab_link": true
+    },
+    "kernelspec": {
+      "name": "python3",
+      "display_name": "Python 3"
+    }
+  },
+  "cells": [
+    {
+      "cell_type": "markdown",
+      "metadata": {
+        "id": "view-in-github",
+        "colab_type": "text"
+      },
+      "source": [
+        "<a href=\"https://colab.research.google.com/github/krishnamani77/CIFAR-10-classification-with-image-augmentation/blob/master/Sentiment-analysis-IMDB\" target=\"_parent\"><img src=\"https://colab.research.google.com/assets/colab-badge.svg\" alt=\"Open In Colab\"/></a>"
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "1m3dZYh6qHro",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 34
+        },
+        "outputId": "dbdcf74e-e2d8-4b9f-b846-36a527b62db3"
+      },
+      "source": [
+        "import keras\n",
+        "import keras.datasets"
+      ],
+      "execution_count": 3,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "Using TensorFlow backend.\n"
+          ],
+          "name": "stderr"
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "tUxIkX2ArsUj",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 51
+        },
+        "outputId": "8a2e7b49-29d5-43a9-e02d-a368b32120ae"
+      },
+      "source": [
+        "# IMDB Sentiment analysis\n",
+        "(X_train, y_train), (X_Test, y_test) = keras.datasets.imdb.load_data()"
+      ],
+      "execution_count": 4,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "Downloading data from https://s3.amazonaws.com/text-datasets/imdb.npz\n",
+            "17465344/17464789 [==============================] - 0s 0us/step\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "0M8pfJrrrnCX",
+        "colab_type": "code",
+        "colab": {}
+      },
+      "source": [
+        "word_index = keras.datasets.imdb.get_word_index()\n",
+        "reverse_index = {}\n",
+        "for k, v in word_index.items():\n",
+        "  reverse_index[v+3] = k"
+      ],
+      "execution_count": 0,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "ya4trdfXUjTX",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 34
+        },
+        "outputId": "2f61c6c6-564c-40e4-fb2d-e28fae788d9a"
+      },
+      "source": [
+        "print(len(word_index), len(reverse_index))"
+      ],
+      "execution_count": 33,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "88584 88584\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "5Jaj5FZfoprV",
+        "colab_type": "code",
+        "colab": {}
+      },
+      "source": [
+        "for id, token in enumerate((\"<pad>\", \"<sos>\", \"<unk\")):\n",
+        "  reverse_index[id] = token"
+      ],
+      "execution_count": 0,
+      "outputs": []
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "OaAJ_HB-hAy0",
+        "colab_type": "code",
+        "colab": {
+          "base_uri": "https://localhost:8080/",
+          "height": 34
+        },
+        "outputId": "69857563-544b-4629-abfc-88709ccbe942"
+      },
+      "source": [
+        "s = ' '.join([reverse_index[idx] for idx in X_train[0][:10]])\n",
+        "\n",
+        "print(s)"
+      ],
+      "execution_count": 37,
+      "outputs": [
+        {
+          "output_type": "stream",
+          "text": [
+            "<sos> this film was just brilliant casting location scenery story\n"
+          ],
+          "name": "stdout"
+        }
+      ]
+    },
+    {
+      "cell_type": "code",
+      "metadata": {
+        "id": "mrT83_EAmiQS",
+        "colab_type": "code",
+        "colab": {}
+      },
+      "source": [
+        ""
+      ],
+      "execution_count": 0,
+      "outputs": []
+    }
+  ]
+}
